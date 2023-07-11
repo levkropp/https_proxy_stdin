@@ -37,3 +37,13 @@ cat proxies.txt | ./format_proxies.sh | python check_proxies.py -t 32
 ```
 
 This command will read a list of proxies from `proxies.txt`, format them using `format_proxies.sh`, and then check each proxy using `check_proxies.py` with 32 threads. The results will be printed to the console. This process ensures that your proxies remain private and are not shared with any third-party service, ensuring their longevity and your privacy.
+
+# TODO
+
+1. **Add URL parameter to Python script:** Implement a command-line option for the Python script (`check_proxies.py`) that allows the user to set the URL that will be used for proxy checking.
+
+2. **Enhance error handling:** Improve the error handling in both scripts to provide more detailed feedback to the user when something goes wrong, such as when the input format is incorrect or the specified URL is not reachable.
+
+3. **Support for proxy authentication:** Update the Python script to support proxies that require username/password authentication.
+
+4. **Performance optimization:** Investigate ways to optimize the performance of the scripts, such as by improving the multithreading in the Python script or streamlining the text processing in the Bash script.
