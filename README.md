@@ -43,7 +43,7 @@ This command will read a list of proxies from `proxies.txt`, format them using `
 
 # 📝 TODO
 
-1. **Add URL parameter to Python script:** 🎯 Implement a command-line option for the Python script (`check_proxies.py`) that allows the user to set the URL that will be used for proxy checking.
+1. ~~**Add URL parameter to Python script:** 🎯 Implement a command-line option for the Python script (`check_proxies.py`) that allows the user to set the URL that will be used for proxy checking.~~
 
 2. **Enhance error handling:** 🚧 Improve the error handling in both scripts to provide more detailed feedback to the user when something goes wrong, such as when the input format is incorrect or the specified URL is not reachable.
 
