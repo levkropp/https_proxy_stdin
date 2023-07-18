@@ -1,6 +1,6 @@
 # https_proxy_stdin
 <p align="center">
-  <img src="https://i.imgur.com/P1zzEJl.png">
+  <img src="[https://i.imgur.com/P1zzEJl.png ↗](https://i.imgur.com/P1zzEJl.png)">
 </p>
 
 Welcome to our repository! 🎉 Here you can find a pair of scripts designed to check the availability of a list of HTTPS proxies. The purpose of these scripts is to provide a secure and private way to check the validity of proxies without exposing them to potential exposure or theft by online proxy checking services. When you use online services to check your proxies, they often add your proxies to their free proxy lists, making them public, which is not desirable for your privacy and the longevity of the proxy.
@@ -21,13 +21,19 @@ cat proxies.txt | ./format_proxies.sh | python check_proxies.py
 
 This is a Python script that checks a list of proxies to see if they are available. The list of proxies is read from the standard input. It uses multithreading to speed up the process 🚀.
 
-The script accepts a `-t` argument which specifies the number of threads to use. For example:
+The script accepts several command-line arguments:
+- `-u` or `--url` to specify the URL that the proxies will be tested with. By default, this is set to `https://example.com`.
+- `-t` or `--threads` to specify the number of threads to use for checking the proxies. By default, this is set to 16.
+- `-v` or `--verbose` to enable verbose mode, which prints out invalid proxies.
+- `-vv` or `--very_verbose` to enable very verbose mode, which prints out the start and end of each proxy check.
+
+For example:
 
 ```bash
-python check_proxies.py -t 32
+python check_proxies.py -u "https://test.com" -t 32 -v
 ```
 
-This will use 32 threads to check the proxies. If the `-t` argument is not provided, the script will default to using 16 threads.
+This will use 32 threads to check the proxies, test the proxies with the URL `https://test.com`, and print out invalid proxies.
 
 Each proxy is checked by attempting to make a GET request to a URL. If the request is successful, the proxy is considered valid ✔️.
 
@@ -36,10 +42,10 @@ Each proxy is checked by attempting to make a GET request to a URL. If the reque
 To use these scripts together, you can use a command like the following:
 
 ```bash
-cat proxies.txt | ./format_proxies.sh | python check_proxies.py -t 32
+cat proxies.txt | ./format_proxies.sh | python check_proxies.py -u "https://test.com" -t 32 -v
 ```
 
-This command will read a list of proxies from `proxies.txt`, format them using `format_proxies.sh`, and then check each proxy using `check_proxies.py` with 32 threads. The results will be printed to the console. This process ensures that your proxies remain private and are not shared with any third-party service, ensuring their longevity and your privacy 🕶️.
+This command will read a list of proxies from `proxies.txt`, format them using `format_proxies.sh`, and then check each proxy using `check_proxies.py` with 32 threads, the URL `https://test.com`, and verbose mode on. The results will be printed to the console. This process ensures that your proxies remain private and are not shared with any third-party service, ensuring their longevity and your privacy 🕶️.
 
 # 📝 TODO
 
