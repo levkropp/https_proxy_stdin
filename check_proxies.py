@@ -31,9 +31,22 @@ parser.add_argument("-u", "--url", help="url to check with proxy", default="http
 parser.add_argument("-t", "--threads", help="number of worker threads", default=16, type=int)
 parser.add_argument("-v", "--verbose", help="print invalid proxies", action='store_true')
 parser.add_argument("-vv", "--very_verbose", help="print start and end of each proxy check", action='store_true')
+parser.add_argument("-k", "--keep_duplicates", help="keep duplicate proxies", action='store_true')
 args = parser.parse_args()
 
 proxies = ast.literal_eval(sys.stdin.read())  # Read list from stdin
+
+# Calculate the number of duplicate proxies
+duplicates = len(proxies) - len(set(proxies))
+print(f"{duplicates} duplicate proxies found.")
+
+# Remove duplicates unless --keep_duplicates is specified
+if not args.keep_duplicates:
+    print("Removing duplicates.")
+    proxies = list(set(proxies))
+else:
+    print("Keeping duplicates.")
+
 random.shuffle(proxies)
 
 valid_proxies = []  # List to store valid proxies and their response times
@@ -60,7 +73,6 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=args.threads) as executor
 
         if args.very_verbose:
             print(f"Finished check for proxy: {proxy}")
-
 
 # Sort the valid proxies by response time in descending order
 valid_proxies.sort(key=lambda x: x[1], reverse=True)
